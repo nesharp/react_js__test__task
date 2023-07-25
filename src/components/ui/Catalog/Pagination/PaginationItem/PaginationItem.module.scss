@@ -1,0 +1,15 @@
+@import "../../../../../styles/vars";
+.paginationItem{
+    width: 37px;
+    height: 37px;
+    margin-right: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid $dark-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $primary-font;
+    font-size: 14px;
+    font-weight: 500;
+}

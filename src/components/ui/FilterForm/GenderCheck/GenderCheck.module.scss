@@ -1,0 +1,33 @@
+@import "../../../../styles/vars";
+.checker{
+    margin-top: 24px;
+    h4{
+        font-family: $primary-font;
+        font-size: 12px;
+        font-weight: 500;
+        color: $gray-color;
+    }
+    .buttons{
+        margin-top: 7px;
+        display: flex;
+        button{
+            display: inline-flex;
+            padding: 8px 18px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 24px;
+            border: 1px solid $dark-color;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            font-family: $primary-font;
+            &:first-child{
+                margin-right: 25.14px;
+            }
+        }
+        .active{
+            background-color: $secondary-accent-color;
+            color: $accent-color;
+        }
+    }
+}

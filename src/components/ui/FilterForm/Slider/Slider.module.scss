@@ -1,0 +1,41 @@
+@import "../../../../styles/vars";
+.custom__slider{
+    margin-top: 24px;
+    h4{
+        color: $gray-color;
+        font-family: Poppins;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .slider{
+        position: relative;
+        width: 307px;
+        margin-top: 22px;
+        >input{
+            background-color: $accent-color;
+            height: 3px;
+            width: 100%;
+            position: absolute;
+            z-index: 1;
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 14px;
+                height: 14px;
+                background-color: $accent-color;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            
+        }
+        
+       
+    }
+    .range{
+        margin-top: calc(18px + 20px);
+        font-family: $primary-font;
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
+

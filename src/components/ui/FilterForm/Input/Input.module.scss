@@ -1,0 +1,25 @@
+@import '../../../../styles/vars';
+.custom__input{
+    h4{
+        color: $gray-color;
+        font-family: $primary-font, sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .input{
+        margin-top: 7px;
+        width: 307px;
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid $dark-color;
+        background:white;
+        input{
+            color: $gray-color;
+            font-family: Poppins;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+}

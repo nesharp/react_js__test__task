@@ -1,0 +1,30 @@
+@import '../../../../../styles/vars';
+.perPageItem{
+        display: flex;
+        margin-left: 64px;
+        width: 80px;
+        height: 37px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
+        border: 1px solid $dark-color;
+        color: $dark-color;
+        text-align: center;
+        font-family: $primary-font;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        options{
+            width: 100%;
+            color: $dark-color;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    // .arrow{
+    //     font-family: $primary-font;
+    //     font-size: 16px;
+    //     font-weight: 500;
+    // }
+    
+}
