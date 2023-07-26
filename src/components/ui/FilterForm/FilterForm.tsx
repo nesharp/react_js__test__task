@@ -15,7 +15,7 @@ import { useActions } from '../../../hooks/useActions'
 
 const FilterForm: FC = () => {
 	//actions
-	const { filterUsers } = useActions()
+	const { sortUsers } = useActions()
 	//old params and params hook
 	const [searchParams, setSearchParams] = useSearchParams()
 	const oldParams = Object.fromEntries(searchParams.entries())
@@ -45,13 +45,10 @@ const FilterForm: FC = () => {
 			sort: sort.sort,
 			sortBy: sort.sortBy
 		})
-		filterUsers({
-			gender,
-			filterName,
-			filterAge,
-			sort
-		})
-	}, [gender, filterName, filterAge, sort])
+	}, [gender, filterName.valueOf, filterAge, sort])
+	useEffect(() => {
+		sortUsers(sort)
+	}, [sort])
 	return (
 		<div className={styles.filters}>
 			<Input

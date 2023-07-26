@@ -1,10 +1,12 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './PerPageItem.module.scss'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useSearchParams } from 'react-router-dom'
+import classNames from 'classnames'
 const PerPageItem: FC = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const oldParams = Object.fromEntries(searchParams.entries())
+	const [isOpen, setIsOpen] = useState(false)
 	useEffect(() => {
 		setSearchParams({
 			...oldParams,
@@ -20,6 +22,7 @@ const PerPageItem: FC = () => {
 						perPage: e.target.value
 					})
 				}}
+				onClick={() => setIsOpen(!isOpen)}
 			>
 				<option value='5'>5</option>
 				<option value='10'>10</option>
@@ -27,9 +30,9 @@ const PerPageItem: FC = () => {
 				<option value='100'>100</option>
 				<option value='all'>All</option>
 			</select>
-			{/* <div className={styles.arrow}>
-				<IoIosArrowDown />
-			</div> */}
+			<div className={styles.arrow}>
+				<IoIosArrowDown className={classNames(isOpen && styles.active, styles.image)} />
+			</div>
 		</div>
 	)
 }

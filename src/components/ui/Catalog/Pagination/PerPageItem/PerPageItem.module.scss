@@ -15,16 +15,33 @@
         font-size: 16px;
         font-weight: 500;
         cursor: pointer;
+        position: relative;
+        select{
+            width:100%;
+        }
         options{
             width: 100%;
             color: $dark-color;
             font-size: 16px;
             font-weight: 500;
         }
-    // .arrow{
-    //     font-family: $primary-font;
-    //     font-size: 16px;
-    //     font-weight: 500;
-    // }
+    .arrow{
+        font-family: $primary-font;
+        font-size: 16px;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        transform: translateY(-50%);
+        .active{
+            transform: rotate(90deg);
+        }
+        .image{
+            transition: all 0.2s ease-in-out;
+        }
+    }
     
 }

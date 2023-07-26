@@ -3,8 +3,8 @@ import { IUserData } from '../interfaces/user.interface'
 
 const url = 'https://randomuser.me/api/'
 export const userService = {
-	async getUsers() {
-		const response = await axios<IUserData>({
+	getUsers() {
+		const response = axios<IUserData>({
 			method: 'GET',
 			url,
 			params: {
@@ -12,6 +12,6 @@ export const userService = {
 				results: 500
 			}
 		})
-		return response.data ? response.data.results : []
+		return response
 	}
 }

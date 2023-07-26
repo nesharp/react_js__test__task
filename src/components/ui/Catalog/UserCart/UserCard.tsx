@@ -4,9 +4,15 @@ import styles from './UserCard.module.scss'
 import Loader from '../../Loader/Loader'
 import { getMonth } from '../../../../utils/getMonth'
 import EditButton from './EditButton/EditButton'
-const UserCard: FC<IUser> = ({ name, picture, dob, location, email }) => {
+import { Link } from 'react-router-dom'
+interface IUserProps {
+	user: IUser
+	id: number
+}
+const UserCard: FC<IUserProps> = ({user, id}) => {
+	const { name, picture, dob, location, email } = user
 	const date = dob?.date?.split('T')[0].split('-')
-
+	
 	return name ? (
 		<div className={styles.userCard}>
 			<div className={styles.wrapper}>
@@ -27,8 +33,9 @@ const UserCard: FC<IUser> = ({ name, picture, dob, location, email }) => {
 				</div>
 			</div>
 			<div className={styles.editButton}>
-				{/*create id prop*/}
-				<EditButton id={1} />
+				<Link to={`/users/${id}`}>
+					<EditButton />
+				</Link>
 			</div>
 		</div>
 	) : (

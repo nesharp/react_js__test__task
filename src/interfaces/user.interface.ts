@@ -39,7 +39,7 @@ export interface Coordinates {
 }
 
 export interface Street {
-	number: number
+	number: string
 	name: string
 }
 
@@ -72,3 +72,4 @@ export interface Picture {
 export interface IUserData {
 	results: IUser[]
 }
+export interface IOldUser {}

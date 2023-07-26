@@ -2,17 +2,22 @@ import { FC } from 'react'
 import { PropsWithChildren } from 'react'
 import styles from './PaginationItem.module.scss'
 import { useSearchParams } from 'react-router-dom'
+import classNames from 'classnames'
+import { IconType } from 'react-icons/lib'
 interface IPaginationItem {
-	onClick?: (e: Event) => void
+	active?: boolean
+	// i wanna fix it
+	children?: any
 }
 const PaginationItem: FC<PropsWithChildren<IPaginationItem>> = ({
-	children
+	children,
+	active
 }) => {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const oldParams = Object.fromEntries(searchParams.entries())
 	return (
 		<button
-			className={styles.paginationItem}
+			className={classNames(styles.paginationItem, active && styles.active)}
 			onClick={e => {
 				setSearchParams({
 					...oldParams,

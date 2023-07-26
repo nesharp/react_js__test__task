@@ -14,14 +14,16 @@ const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
 	useEffect(() => {
 		setSearchParams({
 			...oldParams,
-			page: '1'
+			currentPage: '1',
+			page: '1',
+			perPage: '5'
 		})
 	}, [])
 
 	return (
 		<div className={styles.pagination}>
 			<div className={styles.left}>
-				<button
+				<div
 					onClick={() => {
 						setSearchParams({
 							...oldParams,
@@ -35,29 +37,33 @@ const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
 					<PaginationItem>
 						<IoIosArrowBack />
 					</PaginationItem>
-				</button>
+				</div>
 			</div>
 			<div className={styles.numbers}>
-				{/* {Array.from(Array(paginationItemsCount).keys()).map((item, index) => {
-					return <PaginationItem key={index}>{index + 1}</PaginationItem>
-				})} */}
-
-				<PaginationItem>1</PaginationItem>
-				<PaginationItem>2</PaginationItem>
-				<PaginationItem>3</PaginationItem>
-				<p>...</p>
-				<PaginationItem>
-					{currentPage && +currentPage !== 1 ? +currentPage - 1 : 1}
-				</PaginationItem>
-				<PaginationItem>{currentPage}</PaginationItem>
-				<PaginationItem>{currentPage ? +currentPage + 1 : 3}</PaginationItem>
-				<p>...</p>
-				<PaginationItem>{paginationItemsCount - 2}</PaginationItem>
-				<PaginationItem>{paginationItemsCount - 1}</PaginationItem>
-				<PaginationItem>{paginationItemsCount}</PaginationItem>
+				{paginationItemsCount === 1 ? (
+					<PaginationItem active>1</PaginationItem>
+				) : (
+					<div>
+						<PaginationItem>1</PaginationItem>
+						<PaginationItem>2</PaginationItem>
+						<p>...</p>
+						<PaginationItem>
+							{currentPage && +currentPage !== 1 ? +currentPage - 1 : 1}
+						</PaginationItem>
+						<PaginationItem active>{currentPage}</PaginationItem>
+						<PaginationItem>
+							{currentPage && +currentPage !== paginationItemsCount
+								? +currentPage + 1
+								: currentPage}
+						</PaginationItem>
+						<p>...</p>
+						<PaginationItem>{paginationItemsCount - 1}</PaginationItem>
+						<PaginationItem>{paginationItemsCount}</PaginationItem>
+					</div>
+				)}
 			</div>
 			<div className={styles.right}>
-				<button
+				<div
 					onClick={() => {
 						setSearchParams({
 							...oldParams,
@@ -71,7 +77,7 @@ const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
 					<PaginationItem>
 						<IoIosArrowForward />
 					</PaginationItem>
-				</button>
+				</div>
 			</div>
 			<div>
 				<PerPageItem />

@@ -15,3 +15,7 @@ export interface IFilter {
 	gender: TypeGender
 	sort: IFilterType
 }
+export interface ISort{
+	sortBy: EnumFilterType
+	sort: 'asc' | 'desc'
+}

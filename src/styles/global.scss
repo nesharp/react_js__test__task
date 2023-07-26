@@ -1,2 +1,6 @@
 @import "./reset";
 @import "./imports";
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

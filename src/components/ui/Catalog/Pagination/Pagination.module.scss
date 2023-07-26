@@ -6,13 +6,18 @@
     right: 0;
     margin: 0 10px 10px 0;
     .numbers{
-        display: flex;
-        width: fit-content;
+        
+        >div{
+            display: flex;
+            width: fit-content;
+        }
         p{
             font-family: $primary-font;
             font-size: 14px;
             font-weight: 500;
             margin-right: 8px;
+            display: flex;
+            align-items:end;
         }    
     }
 

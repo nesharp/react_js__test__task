@@ -61,7 +61,6 @@ const DropDown: FC<IDropDown> = ({ caption, sort, setSort }) => {
 								sort.sort === 'desc' && styles.active
 							)}
 							onClick={() => {
-								console.log('clicked')
 								setSort({
 									sort: 'desc',
 									sortBy: sort.sortBy
