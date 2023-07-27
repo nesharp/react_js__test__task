@@ -12,7 +12,7 @@ import { useFilter } from '../../../hooks/useFilter'
 
 interface ICatalog {}
 const Catalog: FC<ICatalog> = () => {
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	const { setUsers } = useActions()
 	const { users } = useTypedSelector(state => state.user)
 	const filteredUsers = useFilter(users)

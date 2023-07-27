@@ -1,60 +1,58 @@
-@import "../../../../styles/vars";
-.userCard{
-    height: 129px;
-    margin-bottom: 8px;
-    border-radius: 12px;
-    border: 1px solid $white-color;
-    width: 100%;
-    padding: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    .wrapper{
-        display: flex;
-        .photo {
-            margin-right: 16px;
-            img {
-                height: 82px;
-                width: 82px;
-                border-radius: 12px;
-            }
-        }
-        .info{
-            h3{
-                color: $dark-color;
-                font-size: 20px;
-                font-weight: 700;
-                font-family: $secondary-font;
-                letter-spacing: -0.4px;
-                margin-bottom: 2px;
-            }
-            h4{
-                color: $gray-color;
-                font-family: $primary-font;
-                font-size: 12px;
-                font-weight: 500;
-                margin-bottom: 2px;
-            } 
-            h5{
-                color: $dark-color;
-                font-family: $secondary-font;
-                font-size: 13px;
-                font-weight: 400;
-                letter-spacing: -0.26px;
-                margin-bottom: 7px;
-            }   
-            h6{
-                color: $dark-color;
-                font-family: $secondary-font;
-                font-size: 13px;
-                font-weight: 400;
-                letter-spacing: -0.26px;
-            }
-        }
-        
-    }
-    
+@import '../../../../styles/vars';
+.userCard {
+	height: 129px;
+	margin-bottom: 8px;
+	border-radius: 12px;
+	border: 1px solid $white-color;
+	width: 100%;
+	padding: 24px;
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+	.wrapper {
+		display: flex;
+		.photo {
+			margin-right: 16px;
+			img {
+				height: 82px;
+				width: 82px;
+				border-radius: 12px;
+			}
+		}
+		.info {
+			h3 {
+				color: $dark-color;
+				font-size: 20px;
+				font-weight: 700;
+				font-family: $secondary-font;
+				letter-spacing: -0.4px;
+				margin-bottom: 2px;
+			}
+			h4 {
+				color: $gray-color;
+				font-family: $primary-font;
+				font-size: 12px;
+				font-weight: 500;
+				margin-bottom: 2px;
+			}
+			h5 {
+				color: $dark-color;
+				font-family: $secondary-font;
+				font-size: 13px;
+				font-weight: 400;
+				letter-spacing: -0.26px;
+				margin-bottom: 7px;
+			}
+			h6 {
+				color: $dark-color;
+				font-family: $secondary-font;
+				font-size: 13px;
+				font-weight: 400;
+				letter-spacing: -0.26px;
+			}
+		}
+	}
 }
-.dragAndDrop{
-    cursor: pointer;
+.dragAndDrop {
+	cursor: pointer;
 }

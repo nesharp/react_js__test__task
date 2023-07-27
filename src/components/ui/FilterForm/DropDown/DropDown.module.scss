@@ -1,66 +1,64 @@
 @import '../../../../styles/vars';
-.custom__dropdown{
-    margin-top: 24px;
-    h4{
-        color: $gray-color;
-        font-family: Poppins;
-        font-size: 12px;
-        font-weight: 500;
-    }
-    .dropdown{
-        display: flex;
-        .dropdown__wrapper{
-            padding: 14px;
-            width: 274px;
-            border-radius: 12px;
-            border: 1px solid $dark-color;
-            display: flex;
-            margin-top: 7px;
-            >select{
-                width: 100%;
-                cursor: pointer;
-                color: $dark-color;
-                font-family: $primary-font;
-                font-size: 16px;
-                font-weight: 500;
-            }
-            >p{
-                width: 10px;
-                height: 21.42px;
-                transform: rotate(90deg);
-                color: black;
-                font-family: $primary-font;
-                font-size: 16px;
-                font-weight: 500;
-                transition: transform 0.2s ease-in-out;
-            }
-            .opened{
-                transform: rotate(180deg);
-            }
-            
-        }
-        .sortType{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-left: 14px;
-            gap: 2px;
-            margin-bottom: 6px;
-            button{
-                width: 20px;
-                height: 10px;
-                .arrow {
-                        color: $gray-color;
-                        cursor: pointer;
-                        height: 10px;
-                        width: 20px;
-                    }
-                .active{
-                    color: $accent-color;
-                }
-            }
-            
-        }
-    }
+.custom__dropdown {
+	margin-top: 24px;
+	h4 {
+		color: $gray-color;
+		font-family: Poppins;
+		font-size: 12px;
+		font-weight: 500;
+	}
+	.dropdown {
+		display: flex;
+		.dropdown__wrapper {
+			padding: 14px;
+			width: 274px;
+			border-radius: 12px;
+			border: 1px solid $dark-color;
+			display: flex;
+			margin-top: 7px;
+			> select {
+				width: 100%;
+				cursor: pointer;
+				color: $dark-color;
+				font-family: $primary-font;
+				font-size: 16px;
+				font-weight: 500;
+			}
+			> p {
+				width: 10px;
+				height: 21.42px;
+				transform: rotate(90deg);
+				color: black;
+				font-family: $primary-font;
+				font-size: 16px;
+				font-weight: 500;
+				transition: transform 0.2s ease-in-out;
+			}
+			.opened {
+				transform: rotate(180deg);
+			}
+		}
+		.sortType {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			margin-left: 14px;
+			gap: 2px;
+			margin-bottom: 6px;
+			button {
+				width: 20px;
+				height: 10px;
+				.arrow {
+					color: $gray-color;
+					cursor: pointer;
+					height: 10px;
+					width: 20px;
+				}
+				.active {
+					color: $accent-color;
+				}
+			}
+		}
+	}
 }

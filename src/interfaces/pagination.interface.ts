@@ -1,5 +1,5 @@
 export interface PaginationData {
-    currentPage: number
-    totalItems: number
-    itemsPerPage: number
+	currentPage: number
+	totalItems: number
+	itemsPerPage: number
 }

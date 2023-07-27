@@ -1,30 +1,30 @@
 @import '../../../styles/vars';
-.home{
-    width: 80%;
-    height: 100vh;
-    margin: 0 auto;
-    padding-top: 10vh;
-    display: flex;
-    .filters{
-        padding: 0;
-        >h2{
-            font-family: $secondary-font, sans-serif;
-            font-weight: 700;
-            font-size: 34px;
-            letter-spacing: -0.68px;
-            line-height: 100%;
-        }
-    }
-    .catalog{
-        margin-left: 67px;
-        width:  calc(100% - 400px);
-        h2{
-            color: $dark-color;
-            font-family: $secondary-font, sans-serif;
-            font-size: 34px;
-            font-weight: 700;
-            letter-spacing: -0.68px;
-            margin-bottom: 32px;
-        }
-    }
+.home {
+	width: 80%;
+	height: 100vh;
+	margin: 0 auto;
+	padding-top: 10vh;
+	display: flex;
+	.filters {
+		padding: 0;
+		> h2 {
+			font-family: $secondary-font, sans-serif;
+			font-weight: 700;
+			font-size: 34px;
+			letter-spacing: -0.68px;
+			line-height: 100%;
+		}
+	}
+	.catalog {
+		margin-left: 67px;
+		width: calc(100% - 400px);
+		h2 {
+			color: $dark-color;
+			font-family: $secondary-font, sans-serif;
+			font-size: 34px;
+			font-weight: 700;
+			letter-spacing: -0.68px;
+			margin-bottom: 32px;
+		}
+	}
 }

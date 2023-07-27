@@ -31,7 +31,9 @@ const PerPageItem: FC = () => {
 				<option value='all'>All</option>
 			</select>
 			<div className={styles.arrow}>
-				<IoIosArrowDown className={classNames(isOpen && styles.active, styles.image)} />
+				<IoIosArrowDown
+					className={classNames(isOpen && styles.active, styles.image)}
+				/>
 			</div>
 		</div>
 	)

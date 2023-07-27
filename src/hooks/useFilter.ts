@@ -18,6 +18,8 @@ export const useFilter = (users: IUser[]): IUser[] => {
 		gender && gender !== '' && gender !== 'null'
 			? filteredByName.filter(user => user.gender === gender)
 			: filteredByName
-	const filteredByAge = filteredByGender.filter(user => user.dob.age >= +ageFrom && user.dob.age <= +ageTo)
+	const filteredByAge = filteredByGender.filter(
+		user => user.dob.age >= +ageFrom && user.dob.age <= +ageTo
+	)
 	return filteredByAge
 }

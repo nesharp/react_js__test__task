@@ -37,8 +37,8 @@ const UserPage: FC = () => {
 			<UserPageButton
 				onClick={() => {
 					navigate(-1)
-					}}
-					className={styles.backButton}
+				}}
+				className={styles.backButton}
 			>
 				{'<'} Back
 			</UserPageButton>

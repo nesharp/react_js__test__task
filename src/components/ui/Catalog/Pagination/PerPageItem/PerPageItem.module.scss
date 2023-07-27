@@ -1,49 +1,48 @@
 @import '../../../../../styles/vars';
-.perPageItem{
-        display: flex;
-        margin-left: 64px;
-        width: 80px;
-        height: 37px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 12px;
-        border: 1px solid $dark-color;
-        color: $dark-color;
-        text-align: center;
-        font-family: $primary-font;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        position: relative;
-        padding: 0 14px;
-        select{
-            width:100%;
-            text-align: left;
-        }
-        options{
-            width: 100%;
-            color: $dark-color;
-            font-size: 16px;
-            font-weight: 500;
-        }
-    .arrow{
-        font-family: $primary-font;
-        font-size: 16px;
-        font-weight: 500;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        right: 10%;
-        top: 50%;
-        transform: translateY(-50%);
-        .active{
-            transform: rotate(90deg);
-        }
-        .image{
-            transition: all 0.2s ease-in-out;
-        }
-    }
-    
+.perPageItem {
+	display: flex;
+	margin-left: 64px;
+	width: 80px;
+	height: 37px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 12px;
+	border: 1px solid $dark-color;
+	color: $dark-color;
+	text-align: center;
+	font-family: $primary-font;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	position: relative;
+	padding: 0 14px;
+	select {
+		width: 100%;
+		text-align: left;
+	}
+	options {
+		width: 100%;
+		color: $dark-color;
+		font-size: 16px;
+		font-weight: 500;
+	}
+	.arrow {
+		font-family: $primary-font;
+		font-size: 16px;
+		font-weight: 500;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		right: 10%;
+		top: 50%;
+		transform: translateY(-50%);
+		.active {
+			transform: rotate(90deg);
+		}
+		.image {
+			transition: all 0.2s ease-in-out;
+		}
+	}
 }

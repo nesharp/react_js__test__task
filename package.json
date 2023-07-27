@@ -16,6 +16,7 @@
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "nouislider": "^15.7.1",
+    "prettier": "^3.0.0",
     "rc-slider": "^10.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -33,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,md,json}\"",
+    "eslint": "eslint"
   },
   "eslintConfig": {
     "extends": [
