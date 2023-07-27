@@ -59,11 +59,12 @@ const Catalog: FC<ICatalog> = () => {
 	return (
 		<div className={styles.catalog}>
 			{paginatedData().map((user: IUser, index: number) => {
+				const currentUserId = users.indexOf(user)
 				return (
 					<UserCard
 						key={index}
 						user={user}
-						id={index + 1}
+						id={currentUserId + 1}
 						dragedUser={dragUser}
 						setDragedUser={setDragUsers}
 					/>
