@@ -3,11 +3,9 @@ import { PropsWithChildren } from 'react'
 import styles from './PaginationItem.module.scss'
 import { useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
-import { IconType } from 'react-icons/lib'
 interface IPaginationItem {
 	active?: boolean
-	// i wanna fix it
-	children?: any
+	children?: number | string | null | JSX.Element
 }
 const PaginationItem: FC<PropsWithChildren<IPaginationItem>> = ({
 	children,

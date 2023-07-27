@@ -2,6 +2,7 @@ import { FC, PropsWithChildren } from 'react'
 import styles from './GenderCheck.module.scss'
 import classNames from 'classnames'
 import { TypeGender } from '../../../../interfaces/filter-interfaces'
+import { useSearchParams } from 'react-router-dom'
 interface IGenderCheck {
 	caption: string
 	gender: TypeGender
@@ -9,6 +10,7 @@ interface IGenderCheck {
 }
 
 const GenderCheck: FC<IGenderCheck> = ({ caption, gender, setGender }) => {
+	const [searchParams, setSearchParams] = useSearchParams()
 	const changeGender = (gender: TypeGender) => {
 		setGender(gender)
 		if (gender === 'male') {
@@ -24,7 +26,11 @@ const GenderCheck: FC<IGenderCheck> = ({ caption, gender, setGender }) => {
 						gender === 'male' && styles.active
 					)}
 					onClick={e => {
-						changeGender('male')
+						if (searchParams.get('gender') === 'male') {
+							changeGender('')
+						} else {
+							changeGender('male')
+						}
 					}}
 				>
 					Male
@@ -35,7 +41,12 @@ const GenderCheck: FC<IGenderCheck> = ({ caption, gender, setGender }) => {
 						gender === 'female' && styles.active
 					)}
 					onClick={e => {
-						changeGender('female')
+						// changeGender('female')
+						if (searchParams.get('gender') === 'female') {
+							setGender('')
+						} else {
+							setGender('female')
+						}
 					}}
 				>
 					Female

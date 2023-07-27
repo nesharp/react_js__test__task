@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { useParams, useNavigate } from 'react-router-dom'
 import styles from './UserPage.module.scss'
@@ -15,6 +15,21 @@ const UserPage: FC = () => {
 	const [user, setUser] = useState<IUser>(users[id ? +id - 1 : 0])
 	const date = user?.dob?.date?.split('T')[0].split('-')
 	const { deleteUser } = useActions()
+	const fileInputRef = useRef<HTMLInputElement>(null)
+	useEffect(() => {
+		fileInputRef.current?.addEventListener('change', () => {
+			const file = fileInputRef.current?.files?.[0]
+			const link = URL.createObjectURL(file as Blob)
+			setUser({
+				...user,
+				picture: {
+					medium: link,
+					large: link,
+					thumbnail: link
+				}
+			})
+		})
+	}, [fileInputRef])
 	return !user ? (
 		<Loader />
 	) : (
@@ -22,19 +37,28 @@ const UserPage: FC = () => {
 			<UserPageButton
 				onClick={() => {
 					navigate(-1)
-				}}
+					}}
+					className={styles.backButton}
 			>
 				{'<'} Back
 			</UserPageButton>
 			<div className={styles.userPage__data}>
 				<div className={styles.leftPart}>
-					<img src={user?.picture?.large} alt='' />
+					<label htmlFor='picture'>
+						<img src={user?.picture?.large} alt='' />
+					</label>
+					<input
+						type='file'
+						id='picture'
+						accept='image/png, image/gif, image/jpeg'
+						ref={fileInputRef}
+					/>
 					<h2>{`${user?.name?.first} ${user?.name?.last}`}</h2>
 					<p>{`${date[2]} ${getMonth(+date[1])} ${date[0]}`}</p>
 					<UserPageButton
 						onClick={() => {
-								deleteUser(id ? +id - 1 : null)
-								navigate(-1)
+							deleteUser(id ? +id - 1 : null)
+							navigate(-1)
 						}}
 						className={styles.deleteButton}
 					>
@@ -43,7 +67,7 @@ const UserPage: FC = () => {
 				</div>
 
 				<div className={styles.rightPart}>
-					<UserPageInputs user={user} />
+					<UserPageInputs user={user} setUser={setUser} />
 				</div>
 			</div>
 		</div>

@@ -15,6 +15,7 @@
             margin-right: 16px;
             img {
                 height: 82px;
+                width: 82px;
                 border-radius: 12px;
             }
         }
@@ -53,4 +54,7 @@
         
     }
     
+}
+.dragAndDrop{
+    cursor: pointer;
 }

@@ -8,7 +8,7 @@ export interface IAgeFilter {
 	from: number
 	to: number
 }
-export type TypeGender = 'male' | 'female'
+export type TypeGender = 'male' | 'female' | ''
 export interface IFilter {
 	filterName: string
 	filterAge: IAgeFilter

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, Dispatch, SetStateAction } from 'react'
 import styles from './UserPageInputs.module.scss'
 import Input from './Input/Input'
 import { IUser } from '../../../../interfaces/user.interface'
@@ -6,10 +6,10 @@ import { useActions } from '../../../../hooks/useActions'
 import { useParams } from 'react-router-dom'
 interface UserPageInputsProps {
 	user: IUser
+	setUser: Dispatch<SetStateAction<IUser>>
 }
-const UserPageInputs: FC<UserPageInputsProps> = ({ user: userData }) => {
+const UserPageInputs: FC<UserPageInputsProps> = ({ user, setUser }) => {
 	const { id } = useParams()
-	const [user, setUser] = useState<IUser>(userData)
 	const { changeUser } = useActions()
 	return (
 		<div className={styles.inputs}>
@@ -17,7 +17,7 @@ const UserPageInputs: FC<UserPageInputsProps> = ({ user: userData }) => {
 				inputValue={`${user?.name.first} ${user?.name?.last}`}
 				buttonValue='Update'
 				onClick={() => {
-					changeUser({user, id: id ? +id - 1 : null})
+					changeUser({ user, id: id ? +id - 1 : null })
 				}}
 			/>
 			<Input

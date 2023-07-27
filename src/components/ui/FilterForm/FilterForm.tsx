@@ -21,7 +21,7 @@ const FilterForm: FC = () => {
 	const oldParams = Object.fromEntries(searchParams.entries())
 	//filter state
 	const [gender, setGender] = useState<TypeGender>(
-		searchParams.get('gender') as TypeGender | 'male'
+		searchParams.get('gender') as TypeGender
 	)
 	const [filterName, setFilterName] = useState<string>(
 		(searchParams.get('name') || '') as string
@@ -45,9 +45,11 @@ const FilterForm: FC = () => {
 			sort: sort.sort,
 			sortBy: sort.sortBy
 		})
-	}, [gender, filterName.valueOf, filterAge, sort])
+	}, [gender, filterName, filterAge, sort])
 	useEffect(() => {
-		sortUsers(sort)
+		if (sort.sortBy !== EnumFilterType.customSort) {
+			sortUsers(sort)
+		}
 	}, [sort])
 	return (
 		<div className={styles.filters}>

@@ -16,8 +16,10 @@
         font-weight: 500;
         cursor: pointer;
         position: relative;
+        padding: 0 14px;
         select{
             width:100%;
+            text-align: left;
         }
         options{
             width: 100%;

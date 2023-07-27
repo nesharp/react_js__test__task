@@ -40,7 +40,7 @@ const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
 				</div>
 			</div>
 			<div className={styles.numbers}>
-				{paginationItemsCount === 1 ? (
+				{paginationItemsCount <= 1 ? (
 					<PaginationItem active>1</PaginationItem>
 				) : (
 					<div>

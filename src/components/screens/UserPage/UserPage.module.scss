@@ -3,15 +3,28 @@
     width: 90%;
     margin: 0 auto;
     padding: 75px 0;
+    .backButton{
+        margin: 0 calc(4%);
+    }
     .userPage__data{
         width: 100%;
         margin-top:73px;
         display: flex;
         .leftPart{
-            width: fit-content;
-            img{
-                height: 200px;
-                border-radius: 50%;
+            // width: fit-content;
+            width: 25%;
+
+            label{
+                margin: 0 calc((100% - 200px)/2);
+                img {
+                    cursor: pointer;
+                    height: 200px;
+                    width: 200px;
+                    border-radius: 50%;
+                }
+            }
+            input{
+                display: none;
             }
             h2{
                 padding-top: 16px;
@@ -31,8 +44,8 @@
                 text-align: center;
             }
             .deleteButton{
-                margin-top: 49px;
                 background-color: $red-color;
+                margin: 49px calc((100% - 200px)/2) 0 calc((100% - 200px)/2);
             }
         }
         .rightPart{

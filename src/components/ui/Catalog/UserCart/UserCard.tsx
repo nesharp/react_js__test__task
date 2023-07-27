@@ -1,20 +1,56 @@
-import { FC } from 'react'
+import { FC, useState, SetStateAction, Dispatch } from 'react'
 import { IUser } from '../../../../interfaces/user.interface'
 import styles from './UserCard.module.scss'
 import Loader from '../../Loader/Loader'
 import { getMonth } from '../../../../utils/getMonth'
 import EditButton from './EditButton/EditButton'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import classNames from 'classnames'
+import { useActions } from '../../../../hooks/useActions'
 interface IUserProps {
 	user: IUser
 	id: number
+	dragedUser?: IUser
+	setDragedUser?: Dispatch<SetStateAction<IUser>>
 }
-const UserCard: FC<IUserProps> = ({user, id}) => {
+const UserCard: FC<IUserProps> = ({ user, id, dragedUser, setDragedUser }) => {
+	const { customSortUsers } = useActions()
 	const { name, picture, dob, location, email } = user
 	const date = dob?.date?.split('T')[0].split('-')
-	
+	const [searchParams, setSearchParams] = useSearchParams()
+	const sort = searchParams.get('sortBy')
+	const dragStartHandler = (
+		e: React.DragEvent<HTMLDivElement>,
+		dragUser: IUser
+	) => {
+		setDragedUser && setDragedUser(dragUser)
+	}
+	const dropHandler = (e: React.DragEvent<HTMLDivElement>, dropUser: IUser) => {
+		e.preventDefault()
+		if (!dragedUser) return
+		customSortUsers({
+			firstUser: dragedUser,
+			secondUser: dropUser
+		})
+	}
 	return name ? (
-		<div className={styles.userCard}>
+		<div
+			key={id}
+			className={classNames(
+				styles.userCard,
+				sort === 'customSort' && styles.dragAndDrop
+			)}
+			draggable={sort === 'customSort'}
+			onDragStart={e => {
+				dragStartHandler(e, user)
+			}}
+			onDragOver={e => {
+				e.preventDefault()
+			}}
+			onDrop={e => {
+				dropHandler(e, user)
+			}}
+		>
 			<div className={styles.wrapper}>
 				<div className={styles.photo}>
 					<img src={picture.large} alt={name?.first} />
