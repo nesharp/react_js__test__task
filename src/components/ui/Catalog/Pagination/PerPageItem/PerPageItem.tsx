@@ -3,9 +3,9 @@ import styles from './PerPageItem.module.scss'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
+import { useOldParams } from '../../../../../hooks/useOldParams'
 const PerPageItem: FC = () => {
-	const [searchParams, setSearchParams] = useSearchParams()
-	const oldParams = Object.fromEntries(searchParams.entries())
+	const { oldParams, setSearchParams } = useOldParams()
 	const [isOpen, setIsOpen] = useState(false)
 	useEffect(() => {
 		setSearchParams({
@@ -19,7 +19,8 @@ const PerPageItem: FC = () => {
 				onChange={e => {
 					setSearchParams({
 						...oldParams,
-						perPage: e.target.value
+						perPage: e.target.value,
+						page: '1'
 					})
 				}}
 				onClick={() => setIsOpen(!isOpen)}

@@ -83,13 +83,14 @@ export const userSlice = createSlice({
 			state,
 			action: PayloadAction<{ firstUser: IUser; secondUser: IUser }>
 		) => {
+			console.log(action.payload)
 			const { firstUser, secondUser } = action.payload
 
 			const firstUserId = state.users.findIndex(
-				user => user.id.value === firstUser.id.value
+				user => user.login.uuid === firstUser.login.uuid
 			)
 			const secondUserId = state.users.findIndex(
-				user => user.id.value === secondUser.id.value
+				user => user.login.uuid === secondUser.login.uuid
 			)
 
 			if (firstUserId !== -1 && secondUserId !== -1) {

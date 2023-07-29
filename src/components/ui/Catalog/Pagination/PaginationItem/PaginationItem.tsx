@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { PropsWithChildren } from 'react'
 import styles from './PaginationItem.module.scss'
-import { useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
+import { useOldParams } from '../../../../../hooks/useOldParams'
 interface IPaginationItem {
 	active?: boolean
 	children?: number | string | null | JSX.Element
@@ -11,8 +11,7 @@ const PaginationItem: FC<PropsWithChildren<IPaginationItem>> = ({
 	children,
 	active
 }) => {
-	const [searchParams, setSearchParams] = useSearchParams()
-	const oldParams = Object.fromEntries(searchParams.entries())
+	const { oldParams, setSearchParams } = useOldParams()
 	return (
 		<button
 			className={classNames(styles.paginationItem, active && styles.active)}

@@ -1,40 +1,30 @@
-import { FC, useState, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import styles from './FilterForm.module.scss'
 import Input from './Input/Input'
 import CustomSlider from './Slider/Slider'
 import GenderCheck from './GenderCheck/GenderCheck'
 import DropDown from './DropDown/DropDown'
-import { useSearchParams } from 'react-router-dom'
-import {
-	IAgeFilter,
-	IFilterType,
-	TypeGender
-} from '../../../interfaces/filter-interfaces'
+
 import { EnumFilterType } from '../../../enums/filter-enums'
 import { useActions } from '../../../hooks/useActions'
+import { useOldParams } from '../../../hooks/useOldParams'
+import { useFilterStates } from '../../../hooks/useFilterStates'
 
 const FilterForm: FC = () => {
-	//actions
 	const { sortUsers } = useActions()
-	//old params and params hook
-	const [searchParams, setSearchParams] = useSearchParams()
-	const oldParams = Object.fromEntries(searchParams.entries())
-	//filter state
-	const [gender, setGender] = useState<TypeGender>(
-		searchParams.get('gender') as TypeGender
-	)
-	const [filterName, setFilterName] = useState<string>(
-		(searchParams.get('name') || '') as string
-	)
-	const [filterAge, setFilterAge] = useState<IAgeFilter>({
-		from: searchParams.get('ageFrom') ? Number(searchParams.get('ageFrom')) : 0,
-		to: searchParams.get('ageTo') ? Number(searchParams.get('ageTo')) : 100
-	})
-	const [sort, setSort] = useState<IFilterType>({
-		sort: (searchParams.get('sort') as 'asc' | 'desc') || 'asc',
-		sortBy:
-			(searchParams.get('sortBy') as EnumFilterType) || EnumFilterType.Name
-	})
+	const { oldParams, searchParams, setSearchParams } = useOldParams()
+
+	const {
+		gender,
+		setGender,
+		filterName,
+		setFilterName,
+		filterAge,
+		setFilterAge,
+		sort,
+		setSort
+	} = useFilterStates()
+	
 	useEffect(() => {
 		setSearchParams({
 			...oldParams,

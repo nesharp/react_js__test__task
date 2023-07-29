@@ -10,10 +10,15 @@ import { useActions } from '../../../../hooks/useActions'
 interface IUserProps {
 	user: IUser
 	id: number
-	dragedUser?: IUser
-	setDragedUser?: Dispatch<SetStateAction<IUser>>
+	draggedUser?: IUser
+	setDraggedUser?: Dispatch<SetStateAction<IUser>>
 }
-const UserCard: FC<IUserProps> = ({ user, id, dragedUser, setDragedUser }) => {
+const UserCard: FC<IUserProps> = ({
+	user,
+	id,
+	draggedUser,
+	setDraggedUser
+}) => {
 	const { customSortUsers } = useActions()
 	const { name, picture, dob, location, email } = user
 	const date = dob?.date?.split('T')[0].split('-')
@@ -23,13 +28,13 @@ const UserCard: FC<IUserProps> = ({ user, id, dragedUser, setDragedUser }) => {
 		e: React.DragEvent<HTMLDivElement>,
 		dragUser: IUser
 	) => {
-		setDragedUser && setDragedUser(dragUser)
+		setDraggedUser && setDraggedUser(dragUser)
 	}
 	const dropHandler = (e: React.DragEvent<HTMLDivElement>, dropUser: IUser) => {
 		e.preventDefault()
-		if (!dragedUser) return
+		if (!draggedUser) return
 		customSortUsers({
-			firstUser: dragedUser,
+			firstUser: draggedUser,
 			secondUser: dropUser
 		})
 	}

@@ -1,12 +1,12 @@
-import { Dispatch, FC, SetStateAction, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import styles from './Pagination.module.scss'
 import { useSearchParams } from 'react-router-dom'
 import PaginationItem from './PaginationItem/PaginationItem'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import PerPageItem from './PerPageItem/PerPageItem'
+import { useOldParams } from '../../../../hooks/useOldParams'
 const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
-	const [searchParams, setSearchParams] = useSearchParams()
-	const oldParams = Object.fromEntries(searchParams.entries())
+	const { oldParams, searchParams, setSearchParams } = useOldParams()
 	const perPage = searchParams.get('perPage')
 	const paginationItemsCount =
 		perPage === 'all' ? 1 : Math.ceil(itemsCount / Number(perPage))
@@ -14,9 +14,8 @@ const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
 	useEffect(() => {
 		setSearchParams({
 			...oldParams,
-			currentPage: '1',
-			page: '1',
-			perPage: '5'
+			perPage: '5',
+			page: oldParams.page ? oldParams.page : '1'
 		})
 	}, [])
 
