@@ -19,7 +19,7 @@ const CustomSlider: FC<PropsWithChildren<ISlider>> = ({
 	useEffect(() => {
 		if (sliderRef.current && !sliderRef.current?.innerHTML) {
 			const slider = noUiSlider.create(sliderRef.current as HTMLDivElement, {
-				start: [16, 70],
+				start: [filterAge.from, filterAge.to],
 				connect: true,
 				range: {
 					min: 1,

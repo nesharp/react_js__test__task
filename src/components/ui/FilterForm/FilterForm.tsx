@@ -33,7 +33,8 @@ const FilterForm: FC = () => {
 			ageFrom: filterAge.from.toString(),
 			ageTo: filterAge.to.toString(),
 			sort: sort.sort,
-			sortBy: sort.sortBy
+			sortBy: sort.sortBy,
+			page: '1'
 		})
 	}, [gender, filterName, filterAge, sort])
 	useEffect(() => {

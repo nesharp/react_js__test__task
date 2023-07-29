@@ -10,12 +10,6 @@ interface IGenderCheck {
 }
 
 const GenderCheck: FC<IGenderCheck> = ({ caption, gender, setGender }) => {
-	const [searchParams, setSearchParams] = useSearchParams()
-	const changeGender = (gender: TypeGender) => {
-		setGender(gender)
-		if (gender === 'male') {
-		}
-	}
 	return (
 		<div className={styles.checker}>
 			<h4>{caption}</h4>
@@ -26,10 +20,10 @@ const GenderCheck: FC<IGenderCheck> = ({ caption, gender, setGender }) => {
 						gender === 'male' && styles.active
 					)}
 					onClick={e => {
-						if (searchParams.get('gender') === 'male') {
-							changeGender('')
+						if (gender === 'male') {
+							setGender('')
 						} else {
-							changeGender('male')
+							setGender('male')
 						}
 					}}
 				>
@@ -41,8 +35,7 @@ const GenderCheck: FC<IGenderCheck> = ({ caption, gender, setGender }) => {
 						gender === 'female' && styles.active
 					)}
 					onClick={e => {
-						// changeGender('female')
-						if (searchParams.get('gender') === 'female') {
+						if (gender === 'female') {
 							setGender('')
 						} else {
 							setGender('female')

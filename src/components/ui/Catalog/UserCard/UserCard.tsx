@@ -7,6 +7,7 @@ import EditButton from './EditButton/EditButton'
 import { Link, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { useActions } from '../../../../hooks/useActions'
+import { dragStartHandler, useDropHandler } from '../../../../hooks/useHandlers'
 interface IUserProps {
 	user: IUser
 	id: number
@@ -19,25 +20,12 @@ const UserCard: FC<IUserProps> = ({
 	draggedUser,
 	setDraggedUser
 }) => {
-	const { customSortUsers } = useActions()
 	const { name, picture, dob, location, email } = user
 	const date = dob?.date?.split('T')[0].split('-')
 	const [searchParams, setSearchParams] = useSearchParams()
 	const sort = searchParams.get('sortBy')
-	const dragStartHandler = (
-		e: React.DragEvent<HTMLDivElement>,
-		dragUser: IUser
-	) => {
-		setDraggedUser && setDraggedUser(dragUser)
-	}
-	const dropHandler = (e: React.DragEvent<HTMLDivElement>, dropUser: IUser) => {
-		e.preventDefault()
-		if (!draggedUser) return
-		customSortUsers({
-			firstUser: draggedUser,
-			secondUser: dropUser
-		})
-	}
+	const dropHandler = useDropHandler(draggedUser)
+
 	return name ? (
 		<div
 			key={id}
@@ -47,7 +35,7 @@ const UserCard: FC<IUserProps> = ({
 			)}
 			draggable={sort === 'customSort'}
 			onDragStart={e => {
-				dragStartHandler(e, user)
+				dragStartHandler(e, user, setDraggedUser)
 			}}
 			onDragOver={e => {
 				e.preventDefault()
