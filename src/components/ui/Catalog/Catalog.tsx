@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './Catalog.module.scss'
 import { IUser } from '../../../interfaces/user.interface'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
@@ -20,6 +20,7 @@ const Catalog: FC<ICatalog> = ({ sort }) => {
 	const filteredUsers = useFilter(users)
 	const sortedUsers = useSortUsers(filteredUsers)
 	const paginatedData = usePaginatedData(sortedUsers)
+
 	return (
 		<div className={styles.catalog}>
 			{paginatedData.map((user: IUser, index: number) => {

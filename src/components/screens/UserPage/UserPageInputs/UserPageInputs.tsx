@@ -31,7 +31,7 @@ const UserPageInputs: FC<UserPageInputsProps> = ({ user, setUser }) => {
 					}
 				}}
 			/>
-			
+
 			<Input
 				inputValue={`${user.email}`}
 				onChange={e => {
@@ -103,7 +103,7 @@ const UserPageInputs: FC<UserPageInputsProps> = ({ user, setUser }) => {
 				}}
 			/>
 			<Input
-				inputValue={`${new Date(user.dob.date).toLocaleDateString().split('.').reverse().join('-')}`}
+				inputValue={`${new Date(user.dob.date).toISOString().split('T')[0]}`}
 				date
 				onChange={e => {
 					setUser({

@@ -1,4 +1,11 @@
-import { Dispatch, FC, SetStateAction, useRef, useState } from 'react'
+import {
+	Dispatch,
+	FC,
+	SetStateAction,
+	useEffect,
+	useRef,
+	useState
+} from 'react'
 import styles from './Input.module.scss'
 import classNames from 'classnames'
 
@@ -16,6 +23,7 @@ const Input: FC<InputProps> = ({
 }) => {
 	const [isBlocked, setIsBlocked] = useState<boolean>(true)
 	const inputRef = useRef<HTMLInputElement>(null)
+
 	return (
 		<div className={styles.wrapper}>
 			<div
@@ -40,7 +48,6 @@ const Input: FC<InputProps> = ({
 					} else {
 						setIsBlocked(true)
 						onClick(e)
-
 					}
 				}}
 			>
