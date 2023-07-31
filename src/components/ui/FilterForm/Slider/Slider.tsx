@@ -41,7 +41,7 @@ const CustomSlider: FC<PropsWithChildren<ISlider>> = ({
 			<h4>{caption && caption}</h4>
 			<div id='slider' ref={sliderRef} className={styles.slider}></div>
 			<div className={styles.range}>
-				<p>1 - 100</p>
+				<p>{`${filterAge.from} - ${filterAge.to}`}</p>
 			</div>
 		</div>
 	)

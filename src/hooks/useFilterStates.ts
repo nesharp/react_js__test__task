@@ -7,12 +7,14 @@ import {
 import { useState } from 'react'
 import { EnumFilterType } from '../enums/filter-enums'
 export const useFilterStates = () => {
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	const [gender, setGender] = useState<TypeGender>(
-		searchParams.get('gender') as TypeGender
+		(searchParams.get('gender') as TypeGender) || ''
 	)
 	const [filterName, setFilterName] = useState<string>(
-		(searchParams.get('name') || '') as string
+		searchParams.get('name') === null
+			? ''
+			: (searchParams.get('name') as string)
 	)
 	const [filterAge, setFilterAge] = useState<IAgeFilter>({
 		from: searchParams.get('ageFrom') ? Number(searchParams.get('ageFrom')) : 0,

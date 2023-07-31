@@ -6,20 +6,21 @@ export const useFilter = (users: IUser[]): IUser[] => {
 	const ageTo = searchParams.get('ageTo') || ''
 	const gender = searchParams.get('gender') || ''
 	const ageFrom = searchParams.get('ageFrom') || ''
-	const filteredByName =
-		filterName && filterName !== ''
-			? users.filter(
-					user =>
-						user.name.first.toLowerCase().includes(filterName.toLowerCase()) ||
-						user.name.last.toLowerCase().includes(filterName.toLowerCase())
-			  )
-			: users
-	const filteredByGender =
-		gender && gender !== '' && gender !== 'null'
-			? filteredByName.filter(user => user.gender === gender)
-			: filteredByName
-	const filteredByAge = filteredByGender.filter(
-		user => user.dob.age >= +ageFrom && user.dob.age <= +ageTo
-	)
-	return filteredByAge
+
+	const filtered = users.filter(user => {
+		if (
+			!user.name.first.toLowerCase().includes(filterName.toLowerCase()) &&
+			!user.name.last.toLowerCase().includes(filterName.toLowerCase())
+		) {
+			return false
+		}
+		if (gender !== '' && gender !== null && user.gender !== gender) {
+			return false
+		}
+		if (user.dob.age < +ageFrom || user.dob.age > +ageTo) {
+			return false
+		}
+		return true
+	})
+	return filtered
 }

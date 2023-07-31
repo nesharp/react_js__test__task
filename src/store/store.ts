@@ -7,17 +7,11 @@ const rootReducer = combineReducers({
 	user: userSlice.reducer
 })
 
-const persistConfig = {
-	key: 'root',
-	storage
-}
-const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
-	reducer: persistedReducer,
+	reducer: rootReducer,
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({
 			serializableCheck: false
 		})
 })
 export type TypeRootState = ReturnType<typeof rootReducer>
-export const persistor = persistStore(store)

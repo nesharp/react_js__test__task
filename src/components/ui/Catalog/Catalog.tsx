@@ -7,14 +7,19 @@ import Pagination from './Pagination/Pagination'
 import { useFilter } from '../../../hooks/useFilter'
 import { usePaginatedData } from '../../../hooks/usePaginatedData'
 import { useSetUsers } from '../../../hooks/useSetUsers'
+import { useSortUsers } from '../../../hooks/useSortUsers'
+import { ISort } from '../../../interfaces/filter-interfaces'
 
-interface ICatalog {}
-const Catalog: FC<ICatalog> = () => {
+interface ICatalog {
+	sort: ISort
+}
+const Catalog: FC<ICatalog> = ({ sort }) => {
 	const { users } = useTypedSelector(state => state.user)
-	const filteredUsers = useFilter(users)
 	useSetUsers(users.length ? true : false)
 	const [draggedUser, setDraggedUsers] = useState<IUser>(users[0])
-	const paginatedData = usePaginatedData(filteredUsers)
+	const filteredUsers = useFilter(users)
+	const sortedUsers = useSortUsers(filteredUsers)
+	const paginatedData = usePaginatedData(sortedUsers)
 	return (
 		<div className={styles.catalog}>
 			{paginatedData.map((user: IUser, index: number) => {

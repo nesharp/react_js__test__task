@@ -1,55 +1,50 @@
-import { FC, useRef, useState } from 'react'
+import { Dispatch, FC, SetStateAction, useRef, useState } from 'react'
 import styles from './Input.module.scss'
 import classNames from 'classnames'
+
 interface InputProps {
-	// onClick: () => void
-	input?: boolean
-	buttonValue: string
 	inputValue: string
-	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 	date?: boolean
-	onClick?: () => void
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	onClick: (e: Object) => void
 }
 const Input: FC<InputProps> = ({
-	input = false,
-	buttonValue,
 	inputValue,
-	onChange,
 	date = false,
-	onClick = () => {}
+	onChange,
+	onClick
 }) => {
 	const [isBlocked, setIsBlocked] = useState<boolean>(true)
 	const inputRef = useRef<HTMLInputElement>(null)
 	return (
 		<div className={styles.wrapper}>
 			<div
-				className={classNames(
-					styles.input,
-					input && isBlocked ? styles.disabled : ''
-				)}
+				className={classNames(styles.input, isBlocked ? styles.disabled : '')}
 			>
 				<input
 					type={date ? 'date' : 'text'}
 					value={inputValue}
-					readOnly={!input || isBlocked}
+					readOnly={isBlocked}
+					required
+					ref={inputRef}
 					onChange={e => {
 						onChange && onChange(e)
 					}}
-					required
-					ref={inputRef}
 				/>
 			</div>
 			<button
-				onClick={() => {
-					if (input) {
-						setIsBlocked(!isBlocked)
+				onClick={e => {
+					if (isBlocked) {
+						setIsBlocked(false)
 						inputRef.current?.focus()
 					} else {
-						onClick()
+						setIsBlocked(true)
+						onClick(e)
+
 					}
 				}}
 			>
-				{buttonValue}
+				{isBlocked ? 'Edit' : 'Update'}
 			</button>
 		</div>
 	)

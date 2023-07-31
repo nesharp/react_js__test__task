@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 import styles from './FilterForm.module.scss'
 import Input from './Input/Input'
 import CustomSlider from './Slider/Slider'
@@ -9,22 +9,33 @@ import { EnumFilterType } from '../../../enums/filter-enums'
 import { useActions } from '../../../hooks/useActions'
 import { useOldParams } from '../../../hooks/useOldParams'
 import { useFilterStates } from '../../../hooks/useFilterStates'
+import {
+	IAgeFilter,
+	ISort,
+	TypeGender
+} from '../../../interfaces/filter-interfaces'
+interface IFilterForm {
+	gender: TypeGender
+	setGender: Dispatch<SetStateAction<TypeGender>>
+	filterName: string
+	setFilterName: Dispatch<SetStateAction<string>>
+	filterAge: IAgeFilter
+	setFilterAge: Dispatch<SetStateAction<IAgeFilter>>
+	sort: ISort
+	setSort: Dispatch<SetStateAction<ISort>>
+}
+const FilterForm: FC<IFilterForm> = ({
+	gender,
+	setGender,
+	filterAge,
+	setFilterAge,
+	filterName,
+	setFilterName,
+	sort,
+	setSort
+}) => {
+	const { oldParams, setSearchParams } = useOldParams()
 
-const FilterForm: FC = () => {
-	const { sortUsers } = useActions()
-	const { oldParams, searchParams, setSearchParams } = useOldParams()
-
-	const {
-		gender,
-		setGender,
-		filterName,
-		setFilterName,
-		filterAge,
-		setFilterAge,
-		sort,
-		setSort
-	} = useFilterStates()
-	
 	useEffect(() => {
 		setSearchParams({
 			...oldParams,
@@ -37,11 +48,6 @@ const FilterForm: FC = () => {
 			page: '1'
 		})
 	}, [gender, filterName, filterAge, sort])
-	useEffect(() => {
-		if (sort.sortBy !== EnumFilterType.customSort) {
-			sortUsers(sort)
-		}
-	}, [sort])
 	return (
 		<div className={styles.filters}>
 			<Input

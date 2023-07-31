@@ -16,74 +16,22 @@ export const userSlice = createSlice({
 		setUsers: (state, action: PayloadAction<IUser[]>) => {
 			state.users = action.payload
 		},
-		sortUsers: (state, action: PayloadAction<ISort>) => {
-			const { sort } = action.payload
-			const sortBy = action.payload.sortBy.toLowerCase()
-			if (sortBy === 'name') {
-				state.users.sort((user1, user2) => sortByNames(user1, user2, sort))
-			}
-			if (sortBy === 'dateofbirth') {
-				state.users.sort((user1, user2) =>
-					sortByDateOfBirth(user1, user2, sort)
-				)
-			}
-			if (sortBy === 'city') {
-				state.users.sort((user1, user2) => sortByCity(user1, user2, sort))
-			}
+
+		deleteUser: (state, { payload }: PayloadAction<string>) => {
+			state.users = state.users.filter(user => user.login.uuid !== payload)
 		},
-		deleteUser: (state, { payload }: PayloadAction<number | null>) => {
-			if (payload !== null) {
-				state.users = state.users.filter(user => user !== state.users[payload])
-			}
-		},
-		changeUser: (
-			state,
-			{ payload }: PayloadAction<{ user: IUser; id: number | null }>
-		) => {
-			if (
-				!payload.user.email.includes('@') ||
-				!payload.user.email.includes('.')
-			) {
-				alert('Invalid email')
-				return
-			}
-			if (payload.user.phone === '') {
-				alert('Invalid phone')
-				return
-			}
-			if (payload.user.location.city.length < 3) {
-				alert('Invalid city')
-				return
-			}
-			if (
-				payload.user.location.street.name.length < 3 ||
-				/[0-9]/.test(payload.user.location.street.name) ||
-				/[a-zа-яё]/i.test(payload.user.location.street.number)
-			) {
-				alert('Invalid street')
-				return
-			}
-			if (
-				!payload.user.dob.date.includes('-') ||
-				/[a-zа-яё]/i.test(payload.user.dob.date) ||
-				payload.user.dob.date === ''
-			) {
-				alert('Invalid date of birth')
-				return
-			}
-			if (payload.id !== null) {
-				if (state.users[payload.id] === payload.user) {
-					alert('Nothing changed')
-				}
-				state.users[payload.id] = payload.user
-				alert('User changed')
+		changeUser: (state, { payload }: PayloadAction<{ user: IUser }>) => {
+			const userIndex = state.users.findIndex(
+				user => user.login.uuid === payload.user.login.uuid
+			)
+			if (userIndex !== -1) {
+				state.users[userIndex] = payload.user
 			}
 		},
 		customSortUsers: (
 			state,
 			action: PayloadAction<{ firstUser: IUser; secondUser: IUser }>
 		) => {
-			console.log(action.payload)
 			const { firstUser, secondUser } = action.payload
 
 			const firstUserId = state.users.findIndex(

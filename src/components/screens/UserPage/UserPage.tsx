@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { useParams, useNavigate } from 'react-router-dom'
 import styles from './UserPage.module.scss'
@@ -8,28 +8,19 @@ import { getMonth } from '../../../utils/getMonth'
 import { IUser } from '../../../interfaces/user.interface'
 import UserPageInputs from './UserPageInputs/UserPageInputs'
 import { useActions } from '../../../hooks/useActions'
+import { useSetUsers } from '../../../hooks/useSetUsers'
 const UserPage: FC = () => {
-	const navigate = useNavigate()
 	const { id } = useParams()
+	const navigate = useNavigate()
 	const users = useTypedSelector(state => state.user.users)
-	const [user, setUser] = useState<IUser>(users[id ? +id - 1 : 0])
+	const userIndex = users.findIndex((user: IUser) => user.login.uuid === id)
+	const [user, setUser] = useState<IUser>(users[userIndex])
 	const date = user?.dob?.date?.split('T')[0].split('-')
-	const { deleteUser } = useActions()
-	const fileInputRef = useRef<HTMLInputElement>(null)
+	const { deleteUser, changeUser } = useActions()
+	useSetUsers(users.length ? true : false)
 	useEffect(() => {
-		fileInputRef.current?.addEventListener('change', () => {
-			const file = fileInputRef.current?.files?.[0]
-			const link = URL.createObjectURL(file as Blob)
-			setUser({
-				...user,
-				picture: {
-					medium: link,
-					large: link,
-					thumbnail: link
-				}
-			})
-		})
-	}, [fileInputRef])
+		setUser(users[userIndex])
+	}, [users])
 	return !user ? (
 		<Loader />
 	) : (
@@ -51,13 +42,25 @@ const UserPage: FC = () => {
 						type='file'
 						id='picture'
 						accept='image/png, image/gif, image/jpeg'
-						ref={fileInputRef}
+						onChange={e => {
+							const file = e.currentTarget.files?.[0]
+							const link = URL.createObjectURL(file as Blob)
+							const changedUser = {
+								...user,
+								picture: {
+									large: link,
+									medium: link,
+									thumbnail: link
+								}
+							}
+							changeUser({ user: changedUser })
+						}}
 					/>
 					<h2>{`${user?.name?.first} ${user?.name?.last}`}</h2>
 					<p>{`${date[2]} ${getMonth(+date[1])} ${date[0]}`}</p>
 					<UserPageButton
 						onClick={() => {
-							deleteUser(id ? +id - 1 : null)
+							deleteUser(user.login.uuid)
 							navigate(-1)
 						}}
 						className={styles.deleteButton}

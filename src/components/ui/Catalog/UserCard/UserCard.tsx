@@ -1,4 +1,4 @@
-import { FC, useState, SetStateAction, Dispatch } from 'react'
+import { FC, SetStateAction, Dispatch, useEffect } from 'react'
 import { IUser } from '../../../../interfaces/user.interface'
 import styles from './UserCard.module.scss'
 import Loader from '../../Loader/Loader'
@@ -6,7 +6,6 @@ import { getMonth } from '../../../../utils/getMonth'
 import EditButton from './EditButton/EditButton'
 import { Link, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
-import { useActions } from '../../../../hooks/useActions'
 import { dragStartHandler, useDropHandler } from '../../../../hooks/useHandlers'
 interface IUserProps {
 	user: IUser
@@ -14,6 +13,7 @@ interface IUserProps {
 	draggedUser?: IUser
 	setDraggedUser?: Dispatch<SetStateAction<IUser>>
 }
+
 const UserCard: FC<IUserProps> = ({
 	user,
 	id,
@@ -22,7 +22,7 @@ const UserCard: FC<IUserProps> = ({
 }) => {
 	const { name, picture, dob, location, email } = user
 	const date = dob?.date?.split('T')[0].split('-')
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	const sort = searchParams.get('sortBy')
 	const dropHandler = useDropHandler(draggedUser)
 
@@ -62,7 +62,7 @@ const UserCard: FC<IUserProps> = ({
 				</div>
 			</div>
 			<div className={styles.editButton}>
-				<Link to={`/users/${id}`}>
+				<Link to={`/users/${user.login.uuid}`}>
 					<EditButton />
 				</Link>
 			</div>

@@ -1,56 +1,87 @@
-import { FC, useState, Dispatch, SetStateAction } from 'react'
+import { FC, Dispatch, SetStateAction } from 'react'
 import styles from './UserPageInputs.module.scss'
 import Input from './Input/Input'
 import { IUser } from '../../../../interfaces/user.interface'
 import { useActions } from '../../../../hooks/useActions'
-import { useParams } from 'react-router-dom'
+import { userValidation } from '../../../../hooks/useValidation'
 interface UserPageInputsProps {
 	user: IUser
 	setUser: Dispatch<SetStateAction<IUser>>
 }
 const UserPageInputs: FC<UserPageInputsProps> = ({ user, setUser }) => {
-	const { id } = useParams()
 	const { changeUser } = useActions()
 	return (
 		<div className={styles.inputs}>
 			<Input
 				inputValue={`${user?.name.first} ${user?.name?.last}`}
-				buttonValue='Update'
-				onClick={() => {
-					changeUser({ user, id: id ? +id - 1 : null })
-				}}
-			/>
-			<Input
-				input
-				inputValue={`${user?.email}`}
-				buttonValue='Edit'
-				onChange={e => {
-					setUser({ ...user, email: e.target.value })
-				}}
-			/>
-			<Input
-				input
-				inputValue={`${user?.phone}`}
-				buttonValue='Edit'
-				onChange={e => {
-					setUser({ ...user, phone: e.target.value })
-				}}
-			/>
-			<Input
-				input
-				inputValue={`${user?.location.city}`}
-				buttonValue='Edit'
 				onChange={e => {
 					setUser({
 						...user,
-						location: { ...user.location, city: e.target.value }
+						name: {
+							...user.name,
+							first: e.target.value.split(' ').slice(0, -1).join(' '),
+							last: e.target.value.split(' ').reverse()[0]
+						}
 					})
+				}}
+				onClick={e => {
+					if (userValidation(user)) {
+						changeUser({ user })
+						alert('User updated')
+					}
+				}}
+			/>
+			
+			<Input
+				inputValue={`${user.email}`}
+				onChange={e => {
+					setUser({
+						...user,
+						email: e.target.value
+					})
+				}}
+				onClick={e => {
+					if (userValidation(user)) {
+						changeUser({ user })
+						alert('User updated')
+					}
 				}}
 			/>
 			<Input
-				input
-				inputValue={`${user?.location.street.name} ${user?.location.street.number}`}
-				buttonValue='Edit'
+				inputValue={`${user.phone}`}
+				onChange={e => {
+					setUser({
+						...user,
+						phone: e.target.value
+					})
+				}}
+				onClick={e => {
+					if (userValidation(user)) {
+						changeUser({ user })
+						alert('User updated')
+					}
+				}}
+			/>
+			<Input
+				inputValue={`${user.location.city}`}
+				onChange={e => {
+					setUser({
+						...user,
+						location: {
+							...user.location,
+							city: e.target.value
+						}
+					})
+				}}
+				onClick={e => {
+					if (userValidation(user)) {
+						changeUser({ user })
+						alert('User updated')
+					}
+				}}
+			/>
+			<Input
+				inputValue={`${user.location.street.name} ${user.location.street.number}`}
 				onChange={e => {
 					setUser({
 						...user,
@@ -64,21 +95,31 @@ const UserPageInputs: FC<UserPageInputsProps> = ({ user, setUser }) => {
 						}
 					})
 				}}
+				onClick={e => {
+					if (userValidation(user)) {
+						changeUser({ user })
+						alert('User updated')
+					}
+				}}
 			/>
 			<Input
-				input
-				inputValue={`${user?.dob.date.split('T')[0]}`}
-				buttonValue='Edit'
+				inputValue={`${new Date(user.dob.date).toLocaleDateString().split('.').reverse().join('-')}`}
+				date
 				onChange={e => {
 					setUser({
 						...user,
 						dob: {
 							...user.dob,
-							date: e.target.value
+							date: new Date(e.target.value).toISOString()
 						}
 					})
 				}}
-				date
+				onClick={e => {
+					if (userValidation(user)) {
+						changeUser({ user })
+						alert('User updated')
+					}
+				}}
 			/>
 		</div>
 	)

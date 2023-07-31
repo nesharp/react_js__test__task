@@ -14,7 +14,7 @@ const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
 	useEffect(() => {
 		setSearchParams({
 			...oldParams,
-			perPage: '5',
+			perPage: oldParams.perPage ? oldParams.perPage : '5',
 			page: oldParams.page ? oldParams.page : '1'
 		})
 	}, [])
@@ -38,29 +38,36 @@ const Pagination: FC<{ itemsCount: number }> = ({ itemsCount }) => {
 					</PaginationItem>
 				</div>
 			</div>
-			<div className={styles.numbers}>
-				{paginationItemsCount <= 1 ? (
-					<PaginationItem active>1</PaginationItem>
-				) : (
-					<div>
-						<PaginationItem>1</PaginationItem>
-						<PaginationItem>2</PaginationItem>
-						<p>...</p>
-						<PaginationItem>
-							{currentPage && +currentPage !== 1 ? +currentPage - 1 : 1}
-						</PaginationItem>
-						<PaginationItem active>{currentPage}</PaginationItem>
-						<PaginationItem>
-							{currentPage && +currentPage !== paginationItemsCount
-								? +currentPage + 1
-								: currentPage}
-						</PaginationItem>
-						<p>...</p>
-						<PaginationItem>{paginationItemsCount - 1}</PaginationItem>
-						<PaginationItem>{paginationItemsCount}</PaginationItem>
-					</div>
-				)}
-			</div>
+			{currentPage && (
+				<div className={styles.numbers}>
+					{paginationItemsCount <= 1 ? (
+						<PaginationItem active>1</PaginationItem>
+					) : (
+						<div>
+							{+currentPage > 2 ? <PaginationItem>1</PaginationItem> : null}
+							{+currentPage > 3 ? <PaginationItem>2</PaginationItem> : null}
+							{+currentPage > 2 ? <p>...</p> : null}
+							{+currentPage !== 1 ? (
+								<PaginationItem>
+									{currentPage && +currentPage - 1}
+								</PaginationItem>
+							) : null}
+							<PaginationItem active>{currentPage}</PaginationItem>
+							{+currentPage !== paginationItemsCount ? (
+								<PaginationItem>{+currentPage + 1}</PaginationItem>
+							) : null}
+							{+currentPage < paginationItemsCount - 1 ? <p>...</p> : null}
+
+							{+currentPage < paginationItemsCount - 2 ? (
+								<PaginationItem>{paginationItemsCount - 1}</PaginationItem>
+							) : null}
+							{+currentPage < paginationItemsCount - 1 ? (
+								<PaginationItem>{paginationItemsCount}</PaginationItem>
+							) : null}
+						</div>
+					)}
+				</div>
+			)}
 			<div className={styles.right}>
 				<div
 					onClick={() => {
